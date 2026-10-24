@@ -40,6 +40,10 @@
             font: inherit;
         }
 
+        button {
+            cursor: pointer;
+        }
+
         .top-bar {
             background: var(--dark);
             color: white;
@@ -100,7 +104,6 @@
             background: var(--primary);
             color: white;
             padding: 0 17px;
-            cursor: pointer;
         }
 
         .header-link {
@@ -151,7 +154,6 @@
             background: var(--primary);
             color: white;
             font-weight: bold;
-            cursor: pointer;
         }
 
         .hero-icon {
@@ -193,13 +195,17 @@
             padding: 23px 10px;
             border-radius: 14px;
             text-align: center;
-            cursor: pointer;
             border: 1px solid #eeeef5;
             transition: transform 0.2s;
         }
 
         .category:hover {
             transform: translateY(-4px);
+        }
+
+        .category.active {
+            border: 2px solid var(--primary);
+            background: #f0efff;
         }
 
         .category-icon {
@@ -231,12 +237,20 @@
         }
 
         .product-image {
-            height: 155px;
+            height: 175px;
             background: #f0efff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
+            font-size: 65px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
         }
 
         .product-info {
@@ -259,6 +273,7 @@
             color: var(--text);
             font-size: 13px;
             min-height: 40px;
+            overflow-wrap: anywhere;
         }
 
         .product-price {
@@ -277,15 +292,14 @@
             color: white;
             font-weight: bold;
             border: none;
-            cursor: pointer;
         }
 
         .buy-button:hover {
             background: var(--primary);
         }
 
-        .empty-message {
-            display: none;
+        .empty-message,
+        .status-message {
             grid-column: 1 / -1;
             text-align: center;
             padding: 30px;
@@ -356,7 +370,7 @@
 
         @media (max-width: 400px) {
             .product-image {
-                height: 120px;
+                height: 125px;
                 font-size: 45px;
             }
 
@@ -366,6 +380,10 @@
 
             .hero {
                 padding: 28px 18px;
+            }
+
+            .product-info h3 {
+                font-size: 14px;
             }
         }
     </style>
@@ -402,7 +420,6 @@
     <main>
 
         <section class="hero">
-
             <div class="hero-content">
                 <div class="eyebrow">Your next great find</div>
 
@@ -419,7 +436,6 @@
             </div>
 
             <div class="hero-icon" aria-hidden="true">🛍️</div>
-
         </section>
 
         <section class="section" id="categories">
@@ -454,7 +470,6 @@
                 </button>
 
             </div>
-
         </section>
 
         <section class="section" id="products">
@@ -462,7 +477,7 @@
             <div class="section-heading">
                 <div>
                     <h2>Featured Products</h2>
-                    <p>Discover our selected products.</p>
+                    <p>Products loaded from NovaCart database.</p>
                 </div>
 
                 <select id="currencySelect" aria-label="Choose currency">
@@ -474,106 +489,16 @@
             </div>
 
             <div class="products" id="productGrid">
-
-                <article class="product-card"
-                         data-category="Electronics"
-                         data-name="Wireless Headphones"
-                         data-price="8500">
-
-                    <div class="product-image">🎧</div>
-
-                    <div class="product-info">
-                        <div class="product-category">Electronics</div>
-                        <h3>Wireless Headphones</h3>
-                        <p class="product-description">
-                            Enjoy your favourite music wherever you go.
-                        </p>
-                        <div class="product-price"
-                             data-base-price="8500">LKR 8,500</div>
-                        <button class="buy-button" type="button">
-                            Buy Now →
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="product-card"
-                         data-category="Electronics"
-                         data-name="Smart Watch"
-                         data-price="12000">
-
-                    <div class="product-image">⌚</div>
-
-                    <div class="product-info">
-                        <div class="product-category">Electronics</div>
-                        <h3>Smart Watch</h3>
-                        <p class="product-description">
-                            A smart companion for everyday activities.
-                        </p>
-                        <div class="product-price"
-                             data-base-price="12000">LKR 12,000</div>
-                        <button class="buy-button" type="button">
-                            Buy Now →
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="product-card"
-                         data-category="Fashion"
-                         data-name="Classic Backpack"
-                         data-price="6500">
-
-                    <div class="product-image">🎒</div>
-
-                    <div class="product-info">
-                        <div class="product-category">Fashion</div>
-                        <h3>Classic Backpack</h3>
-                        <p class="product-description">
-                            A practical bag for school and travel.
-                        </p>
-                        <div class="product-price"
-                             data-base-price="6500">LKR 6,500</div>
-                        <button class="buy-button" type="button">
-                            Buy Now →
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="product-card"
-                         data-category="Home"
-                         data-name="Desk Lamp"
-                         data-price="4200">
-
-                    <div class="product-image">💡</div>
-
-                    <div class="product-info">
-                        <div class="product-category">Home & Living</div>
-                        <h3>Desk Lamp</h3>
-                        <p class="product-description">
-                            Add comfortable lighting to your workspace.
-                        </p>
-                        <div class="product-price"
-                             data-base-price="4200">LKR 4,200</div>
-                        <button class="buy-button" type="button">
-                            Buy Now →
-                        </button>
-                    </div>
-
-                </article>
-
-                <p class="empty-message" id="emptyMessage">
-                    No products found. Try another search.
+                <p class="status-message" id="loadingMessage">
+                    Loading products...
                 </p>
-
             </div>
 
             <div class="notice">
                 <strong>Affiliate disclosure:</strong>
                 NovaCart may earn a commission when you purchase through
-                qualifying affiliate links. Prices shown here are sample
-                prices for design purposes and are not live store prices.
+                qualifying affiliate links. Product prices and availability
+                should be verified with the seller before purchasing.
             </div>
 
         </section>
@@ -601,61 +526,46 @@
     </footer>
 
     <script>
+        // -----------------------------------------
+        // SUPABASE CONNECTION
+        // -----------------------------------------
+
+        const SUPABASE_URL =
+            "https://cscpilzhxnuxoykaumhj.supabase.co";
+
+        // Public publishable key only.
+        // Never put a Supabase secret key in this file.
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_0tWuObUYcGsIB-Yz9ASoog_NhxpVX1Z";
+
+        const productGrid = document.getElementById("productGrid");
         const searchInput = document.getElementById("searchInput");
         const searchForm = document.getElementById("searchForm");
-        const cards = document.querySelectorAll(".product-card");
-        const emptyMessage = document.getElementById("emptyMessage");
         const currencySelect = document.getElementById("currencySelect");
 
+        let allProducts = [];
         let selectedCategory = "All";
 
-        function filterProducts() {
-            const query = searchInput.value.toLowerCase().trim();
-            let visibleCount = 0;
+        // -----------------------------------------
+        // CATEGORY ICONS
+        // -----------------------------------------
 
-            cards.forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                const category = card.dataset.category;
-                const matchesSearch =
-                    name.includes(query) ||
-                    category.toLowerCase().includes(query);
+        function getCategoryIcon(category) {
+            const value = String(category || "").toLowerCase();
 
-                const matchesCategory =
-                    selectedCategory === "All" ||
-                    category === selectedCategory;
+            if (value.includes("electronic")) return "🎧";
+            if (value.includes("fashion")) return "👕";
+            if (value.includes("home")) return "🏠";
+            if (value.includes("lifestyle")) return "🎒";
 
-                const visible = matchesSearch && matchesCategory;
-
-                card.style.display = visible ? "" : "none";
-
-                if (visible) visibleCount++;
-            });
-
-            emptyMessage.style.display =
-                visibleCount === 0 ? "block" : "none";
+            return "🛍️";
         }
 
-        searchForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            filterProducts();
-
-            document.getElementById("products").scrollIntoView({
-                behavior: "smooth"
-            });
-        });
-
-        searchInput.addEventListener("input", filterProducts);
-
-        document.querySelectorAll(".category").forEach(button => {
-            button.addEventListener("click", function() {
-                selectedCategory = this.dataset.category;
-                filterProducts();
-
-                document.getElementById("products").scrollIntoView({
-                    behavior: "smooth"
-                });
-            });
-        });
+        // -----------------------------------------
+        // FORMAT PRICE
+        // Prices in the database are assumed to be LKR.
+        // The exchange rates below are approximate examples.
+        // -----------------------------------------
 
         const currencySettings = {
             LKR: { rate: 1, locale: "en-LK" },
@@ -664,37 +574,270 @@
             INR: { rate: 1 / 3.5, locale: "en-IN" }
         };
 
-        currencySelect.addEventListener("change", function() {
-            const currency = this.value;
+        function formatPrice(lkrPrice) {
+            const currency = currencySelect.value;
             const settings = currencySettings[currency];
 
-            document.querySelectorAll(".product-price").forEach(price => {
-                const lkrPrice = Number(price.dataset.basePrice);
-                const convertedPrice = lkrPrice * settings.rate;
+            const convertedPrice =
+                Number(lkrPrice || 0) * settings.rate;
 
-                price.textContent = new Intl.NumberFormat(
-                    settings.locale,
-                    {
-                        style: "currency",
-                        currency: currency,
-                        maximumFractionDigits: 0
+            return new Intl.NumberFormat(settings.locale, {
+                style: "currency",
+                currency: currency,
+                maximumFractionDigits: 0
+            }).format(convertedPrice);
+        }
+
+        // -----------------------------------------
+        // CREATE PRODUCT CARD SAFELY
+        // -----------------------------------------
+
+        function createProductCard(product) {
+            const card = document.createElement("article");
+            card.className = "product-card";
+
+            const category = String(product.category || "Other");
+            const name = String(product.name || "Unnamed product");
+            const description = String(product.description || "");
+            const price = Number(product.price || 0);
+
+            card.dataset.category = category;
+            card.dataset.name = name;
+            card.dataset.price = String(price);
+
+            const imageContainer = document.createElement("div");
+            imageContainer.className = "product-image";
+            imageContainer.textContent = getCategoryIcon(category);
+
+            if (product.image_url) {
+                try {
+                    const imageURL = new URL(product.image_url);
+
+                    if (imageURL.protocol === "https:") {
+                        const image = document.createElement("img");
+
+                        image.src = imageURL.href;
+                        image.alt = name;
+                        image.loading = "lazy";
+
+                        image.onerror = function() {
+                            image.remove();
+                            imageContainer.textContent =
+                                getCategoryIcon(category);
+                        };
+
+                        imageContainer.textContent = "";
+                        imageContainer.appendChild(image);
                     }
-                ).format(convertedPrice);
-            });
-        });
+                } catch (error) {
+                    // Keep the category icon if the image URL is invalid.
+                }
+            }
 
-        document.querySelectorAll(".buy-button").forEach(button => {
-            button.addEventListener("click", function() {
+            const info = document.createElement("div");
+            info.className = "product-info";
+
+            const categoryLabel = document.createElement("div");
+            categoryLabel.className = "product-category";
+            categoryLabel.textContent = category;
+
+            const title = document.createElement("h3");
+            title.textContent = name;
+
+            const details = document.createElement("p");
+            details.className = "product-description";
+            details.textContent = description;
+
+            const priceLabel = document.createElement("div");
+            priceLabel.className = "product-price";
+            priceLabel.dataset.basePrice = String(price);
+            priceLabel.textContent = formatPrice(price);
+
+            const buyButton = document.createElement("button");
+            buyButton.className = "buy-button";
+            buyButton.type = "button";
+            buyButton.textContent = "Buy Now →";
+
+            buyButton.addEventListener("click", function() {
                 alert(
-                    "This is a sample product. We will add the real " +
-                    "affiliate link after choosing an affiliate program."
+                    "This product is listed on NovaCart. " +
+                    "A seller or affiliate link has not been configured yet."
                 );
             });
+
+            info.append(
+                categoryLabel,
+                title,
+                details,
+                priceLabel,
+                buyButton
+            );
+
+            card.append(imageContainer, info);
+
+            return card;
+        }
+
+        // -----------------------------------------
+        // DISPLAY PRODUCTS
+        // -----------------------------------------
+
+        function renderProducts() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            productGrid.replaceChildren();
+
+            const filteredProducts = allProducts.filter(product => {
+                const name = String(product.name || "").toLowerCase();
+                const category =
+                    String(product.category || "").toLowerCase();
+
+                const description =
+                    String(product.description || "").toLowerCase();
+
+                const matchesSearch =
+                    name.includes(query) ||
+                    category.includes(query) ||
+                    description.includes(query);
+
+                const matchesCategory =
+                    selectedCategory === "All" ||
+                    String(product.category || "").toLowerCase() ===
+                    selectedCategory.toLowerCase();
+
+                return matchesSearch && matchesCategory;
+            });
+
+            if (filteredProducts.length === 0) {
+                const message = document.createElement("p");
+                message.className = "empty-message";
+                message.textContent = allProducts.length === 0
+                    ? "No products are available in the database yet."
+                    : "No products found. Try another search or category.";
+
+                               productGrid.appendChild(message);
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                productGrid.appendChild(createProductCard(product));
+            });
+        }
+
+        // -----------------------------------------
+        // LOAD PRODUCTS FROM SUPABASE
+        // -----------------------------------------
+
+        async function loadProducts() {
+            productGrid.innerHTML =
+                '<p class="status-message">Loading products...</p>';
+
+            try {
+                const endpoint =
+                    SUPABASE_URL +
+                    "/rest/v1/products" +
+                    "?select=id,name,description,price,image_url,category,stock" +
+                    "&order=id.desc";
+
+                const response = await fetch(endpoint, {
+                    method: "GET",
+                    headers: {
+                        "apikey": SUPABASE_PUBLISHABLE_KEY,
+                        "Authorization":
+                            "Bearer " + SUPABASE_PUBLISHABLE_KEY
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Supabase returned HTTP " + response.status
+                    );
+                }
+
+                const data = await response.json();
+
+                if (!Array.isArray(data)) {
+                    throw new Error("Unexpected database response.");
+                }
+
+                allProducts = data;
+                renderProducts();
+
+            } catch (error) {
+                console.error("NovaCart product loading error:", error);
+
+                productGrid.innerHTML = "";
+
+                const message = document.createElement("p");
+                message.className = "status-message";
+                message.textContent =
+                    "Products could not be loaded. Please check the " +
+                    "Supabase URL, publishable key, table permissions " +
+                    "and internet connection, then refresh the page.";
+
+                productGrid.appendChild(message);
+            }
+        }
+
+        // -----------------------------------------
+        // SEARCH
+        // -----------------------------------------
+
+        searchForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            renderProducts();
+
+            document.getElementById("products").scrollIntoView({
+                behavior: "smooth"
+            });
         });
+
+        searchInput.addEventListener("input", renderProducts);
+
+        // -----------------------------------------
+        // CATEGORY FILTER
+        // -----------------------------------------
+
+        document.querySelectorAll(".category").forEach(button => {
+            button.addEventListener("click", function() {
+                const clickedCategory = this.dataset.category;
+
+                if (selectedCategory === clickedCategory) {
+                    selectedCategory = "All";
+                } else {
+                    selectedCategory = clickedCategory;
+                }
+
+                document.querySelectorAll(".category").forEach(item => {
+                    item.classList.toggle(
+                        "active",
+                        item.dataset.category === selectedCategory
+                    );
+                });
+
+                renderProducts();
+
+                document.getElementById("products").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+
+        // -----------------------------------------
+        // CURRENCY SELECTOR
+        // -----------------------------------------
+
+        currencySelect.addEventListener("change", renderProducts);
+
+        // -----------------------------------------
+        // FOOTER YEAR AND STARTUP
+        // -----------------------------------------
 
         document.getElementById("year").textContent =
             new Date().getFullYear();
+
+        loadProducts();
     </script>
 
 </body>
-  </html>
+</html>
