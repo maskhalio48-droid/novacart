@@ -1,1 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>NovaCart | Discover Something Better</title>
+
+    <meta name="description"
+          content="Discover electronics, fashion and everyday essentials with NovaCart.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #635bff;
+            --dark: #171923;
+            --light: #f6f7fb;
+            --text: #555b6e;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, select {
+            font: inherit;
+        }
+
+        .top-bar {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 9px;
+            font-size: 13px;
+        }
+
+        header {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 12px #00000008;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .search-box {
+            display: flex;
+            flex: 1;
+            max-width: 470px;
+            border: 1px solid #e4e6ef;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .search-box input {
+            width: 100%;
+            min-width: 0;
+            border: none;
+            outline: none;
+            padding: 12px;
+        }
+
+        .search-box button {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 0 17px;
+            cursor: pointer;
+        }
+
+        .header-link {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 55px 35px;
+            border-radius: 20px;
+            background: linear-gradient(120deg, #e8e7ff, #f4efff);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 54px);
+            line-height: 1.12;
+            margin: 15px 0;
+        }
+
+        .hero p {
+            color: var(--text);
+            margin-bottom: 25px;
+        }
+
+        .primary-button {
+            display: inline-block;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .hero-icon {
+            font-size: clamp(65px, 12vw, 135px);
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            font-size: 25px;
+        }
+
+        .section-heading p {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            padding: 23px 10px;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #eeeef5;
+            transition: transform 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .category h3 {
+            font-size: 15px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #eeeef5;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px #20204010;
+        }
+
+        .product-image {
+            height: 155px;
+            background: #f0efff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin: 7px 0;
+        }
+
+        .product-description {
+            color: var(--text);
+            font-size: 13px;
+            min-height: 40px;
+        }
+
+        .product-price {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .buy-button {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 11px;
+            border-radius: 8px;
+            background: var(--dark);
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background: var(--primary);
+        }
+
+        .empty-message {
+            display: none;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            color: var(--text);
+        }
+
+        .notice {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            color: var(--text);
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            margin-top: 55px;
+            padding: 35px 20px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-inner p {
+            color: #c3c5d1;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                padding: 35px 22px;
+            }
+
+            .header-inner {
+                gap: 13px;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .product-image {
+                height: 120px;
+                font-size: 45px;
+            }
+
+            .product-info {
+                padding: 11px;
+            }
+
+            .hero {
+                padding: 28px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        Welcome to NovaCart — Discover products you love
+    </div>
+
+    <header>
+        <div class="header-inner">
+
+            <a href="#" class="logo">Nova<span>Cart</span></a>
+
+            <form class="search-box" id="searchForm">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    aria-label="Search products"
+                >
+                <button type="submit">Search</button>
+            </form>
+
+            <a href="#products" class="header-link">
+                🛍️ Explore Products
+            </a>
+
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+                <div class="eyebrow">Your next great find</div>
+
+                <h1>Discover Something Better.</h1>
+
+                <p>
+                    Explore electronics, fashion and everyday essentials
+                    from stores around the world.
+                </p>
+
+                <a href="#products" class="primary-button">
+                    Explore Products →
+                </a>
+            </div>
+
+            <div class="hero-icon" aria-hidden="true">🛍️</div>
+
+        </section>
+
+        <section class="section" id="categories">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Shop by Category</h2>
+                    <p>Find what you are looking for.</p>
+                </div>
+            </div>
+
+            <div class="categories">
+
+                <button class="category" data-category="Electronics">
+                    <div class="category-icon">🎧</div>
+                    <h3>Electronics</h3>
+                </button>
+
+                <button class="category" data-category="Fashion">
+                    <div class="category-icon">👕</div>
+                    <h3>Fashion</h3>
+                </button>
+
+                <button class="category" data-category="Home">
+                    <div class="category-icon">🏠</div>
+                    <h3>Home & Living</h3>
+                </button>
+
+                <button class="category" data-category="Lifestyle">
+                    <div class="category-icon">🎒</div>
+                    <h3>Lifestyle</h3>
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="section" id="products">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Featured Products</h2>
+                    <p>Discover our selected products.</p>
+                </div>
+
+                <select id="currencySelect" aria-label="Choose currency">
+                    <option value="LKR">LKR — Sri Lanka</option>
+                    <option value="USD">USD — United States</option>
+                    <option value="GBP">GBP — United Kingdom</option>
+                    <option value="INR">INR — India</option>
+                </select>
+            </div>
+
+            <div class="products" id="productGrid">
+
+                <article class="product-card"
+                         data-category="Electronics"
+                         data-name="Wireless Headphones"
+                         data-price="8500">
+
+                    <div class="product-image">🎧</div>
+
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3>Wireless Headphones</h3>
+                        <p class="product-description">
+                            Enjoy your favourite music wherever you go.
+                        </p>
+                        <div class="product-price"
+                             data-base-price="8500">LKR 8,500</div>
+                        <button class="buy-button" type="button">
+                            Buy Now →
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="product-card"
+                         data-category="Electronics"
+                         data-name="Smart Watch"
+                         data-price="12000">
+
+                    <div class="product-image">⌚</div>
+
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3>Smart Watch</h3>
+                        <p class="product-description">
+                            A smart companion for everyday activities.
+                        </p>
+                        <div class="product-price"
+                             data-base-price="12000">LKR 12,000</div>
+                        <button class="buy-button" type="button">
+                            Buy Now →
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="product-card"
+                         data-category="Fashion"
+                         data-name="Classic Backpack"
+                         data-price="6500">
+
+                    <div class="product-image">🎒</div>
+
+                    <div class="product-info">
+                        <div class="product-category">Fashion</div>
+                        <h3>Classic Backpack</h3>
+                        <p class="product-description">
+                            A practical bag for school and travel.
+                        </p>
+                        <div class="product-price"
+                             data-base-price="6500">LKR 6,500</div>
+                        <button class="buy-button" type="button">
+                            Buy Now →
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="product-card"
+                         data-category="Home"
+                         data-name="Desk Lamp"
+                         data-price="4200">
+
+                    <div class="product-image">💡</div>
+
+                    <div class="product-info">
+                        <div class="product-category">Home & Living</div>
+                        <h3>Desk Lamp</h3>
+                        <p class="product-description">
+                            Add comfortable lighting to your workspace.
+                        </p>
+                        <div class="product-price"
+                             data-base-price="4200">LKR 4,200</div>
+                        <button class="buy-button" type="button">
+                            Buy Now →
+                        </button>
+                    </div>
+
+                </article>
+
+                <p class="empty-message" id="emptyMessage">
+                    No products found. Try another search.
+                </p>
+
+            </div>
+
+            <div class="notice">
+                <strong>Affiliate disclosure:</strong>
+                NovaCart may earn a commission when you purchase through
+                qualifying affiliate links. Prices shown here are sample
+                prices for design purposes and are not live store prices.
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+
+            <div>
+                <div class="logo">Nova<span>Cart</span></div>
+                <p>Discover products. Shop with confidence.</p>
+                <p>© <span id="year"></span> NovaCart</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <a href="#categories">Categories</a>
+                <a href="#products">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const searchForm = document.getElementById("searchForm");
+        const cards = document.querySelectorAll(".product-card");
+        const emptyMessage = document.getElementById("emptyMessage");
+        const currencySelect = document.getElementById("currencySelect");
+
+        let selectedCategory = "All";
+
+        function filterProducts() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                const category = card.dataset.category;
+                const matchesSearch =
+                    name.includes(query) ||
+                    category.toLowerCase().includes(query);
+
+                const matchesCategory =
+                    selectedCategory === "All" ||
+                    category === selectedCategory;
+
+                const visible = matchesSearch && matchesCategory;
+
+                card.style.display = visible ? "" : "none";
+
+                if (visible) visibleCount++;
+            });
+
+            emptyMessage.style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+
+        searchForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            filterProducts();
+
+            document.getElementById("products").scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+
+        searchInput.addEventListener("input", filterProducts);
+
+        document.querySelectorAll(".category").forEach(button => {
+            button.addEventListener("click", function() {
+                selectedCategory = this.dataset.category;
+                filterProducts();
+
+                document.getElementById("products").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+
+        const currencySettings = {
+            LKR: { rate: 1, locale: "en-LK" },
+            USD: { rate: 1 / 300, locale: "en-US" },
+            GBP: { rate: 1 / 380, locale: "en-GB" },
+            INR: { rate: 1 / 3.5, locale: "en-IN" }
+        };
+
+        currencySelect.addEventListener("change", function() {
+            const currency = this.value;
+            const settings = currencySettings[currency];
+
+            document.querySelectorAll(".product-price").forEach(price => {
+                const lkrPrice = Number(price.dataset.basePrice);
+                const convertedPrice = lkrPrice * settings.rate;
+
+                price.textContent = new Intl.NumberFormat(
+                    settings.locale,
+                    {
+                        style: "currency",
+                        currency: currency,
+                        maximumFractionDigits: 0
+                    }
+                ).format(convertedPrice);
+            });
+        });
+
+        document.querySelectorAll(".buy-button").forEach(button => {
+            button.addEventListener("click", function() {
+                alert(
+                    "This is a sample product. We will add the real " +
+                    "affiliate link after choosing an affiliate program."
+                );
+            });
+        });
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+  </html>
